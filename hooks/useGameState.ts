@@ -2,9 +2,9 @@
 
 import { useCallback, useEffect, useMemo, useState } from 'react'
 import casesData from '@/data/cases.json'
-import { CaseData, GameState, Intervention, Symptom, Review } from '@/types'
+import { CaseData, LegacyGameState, LegacyIntervention, LegacySymptom, Review } from '@/types'
 
-const STARTING_STATE: GameState = {
+const STARTING_STATE: LegacyGameState = {
   caseIndex: 0,
   stageIndex: 0,
   totalScore: 0,
@@ -14,17 +14,17 @@ const STARTING_STATE: GameState = {
 
 export function useGameState() {
   const cases = casesData as unknown as CaseData[]
-  const [state, setState] = useState<GameState>(STARTING_STATE)
+  const [state, setState] = useState<LegacyGameState>(STARTING_STATE)
   const [finished, setFinished] = useState(false)
   const [review, setReview] = useState<Review>([])
   const currentCase = cases[state.caseIndex]
 
   useEffect(() => {
-    setState((s) => ({ ...s, stageIndex: 0, answeredDiagnosis: false, selectedInterventions: {} }))
+    setState((s: LegacyGameState) => ({ ...s, stageIndex: 0, answeredDiagnosis: false, selectedInterventions: {} }))
   }, [state.caseIndex])
 
   const currentStage = currentCase.stages[state.stageIndex]
-  const visibleSymptoms: Symptom[] = currentStage.symptoms
+  const visibleSymptoms: LegacySymptom[] = currentStage.symptoms
 
   const diagnosisOptions = useMemo(() => currentCase.diagnosisOptions, [currentCase])
 
@@ -35,7 +35,7 @@ export function useGameState() {
       const option = currentCase.diagnosisOptions.find((o) => o.id === id)
       if (!option) return
       if (option.correct) {
-        setState((s) => ({ ...s, answeredDiagnosis: true, totalScore: s.totalScore + 10 }))
+        setState((s: LegacyGameState) => ({ ...s, answeredDiagnosis: true, totalScore: s.totalScore + 10 }))
         setReview((r) => [
           ...r,
           {
@@ -49,20 +49,20 @@ export function useGameState() {
         ])
       } else {
         // wrong -> if stage 0 then go to stage 1; if already at last stage keep and allow second guess
-        setState((s) => ({ ...s, stageIndex: Math.min(s.stageIndex + 1, currentCase.stages.length - 1) }))
+        setState((s: LegacyGameState) => ({ ...s, stageIndex: Math.min(s.stageIndex + 1, currentCase.stages.length - 1) }))
       }
     },
     [currentCase]
   )
 
   const moveToInterventions = useCallback(() => {
-    setState((s) => ({ ...s, answeredDiagnosis: true }))
+    setState((s: LegacyGameState) => ({ ...s, answeredDiagnosis: true }))
   }, [])
 
-  const interventionOptions: Intervention[] = useMemo(() => currentCase.interventionPool, [currentCase])
+  const interventionOptions: LegacyIntervention[] = useMemo(() => currentCase.interventionPool, [currentCase])
 
   const toggleIntervention = useCallback((id: string) => {
-    setState((s) => ({ ...s, selectedInterventions: { ...s.selectedInterventions, [id]: !s.selectedInterventions[id] } }))
+    setState((s: LegacyGameState) => ({ ...s, selectedInterventions: { ...s.selectedInterventions, [id]: !s.selectedInterventions[id] } }))
   }, [])
 
   const submitInterventions = useCallback(() => {
@@ -95,9 +95,9 @@ export function useGameState() {
     const atLastCase = state.caseIndex >= cases.length - 1
     if (atLastCase) {
       setFinished(true)
-      setState((s) => ({ ...s, totalScore: s.totalScore + gained }))
+      setState((s: LegacyGameState) => ({ ...s, totalScore: s.totalScore + gained }))
     } else {
-      setState((s) => ({
+      setState((s: LegacyGameState) => ({
         ...s,
         totalScore: s.totalScore + gained,
         caseIndex: s.caseIndex + 1,

@@ -25,7 +25,42 @@ export interface GameState {
   selectedInterventions: string[];
 }
 
-// Legacy types for backwards compatibility
+// Legacy types for existing code compatibility
+export type LegacySymptom = {
+  id: string
+  text: string
+  visual?: string // optional key to trigger avatar visual change
+}
+
+export type LegacyIntervention = {
+  id: string
+  text: string
+  correct: boolean
+}
+
+export type CaseStage = {
+  id: string
+  symptoms: LegacySymptom[]
+}
+
+export type CaseData = {
+  id: string
+  title: string
+  avatar: string // base avatar image src in /public/avatars
+  visualSymptoms?: Record<string, string> // key -> avatar image src for visual symptom
+  diagnosisOptions: { id: string; text: string; correct: boolean }[]
+  stages: CaseStage[]
+  interventionPool: LegacyIntervention[]
+}
+
+export type LegacyGameState = {
+  caseIndex: number
+  stageIndex: number
+  totalScore: number
+  answeredDiagnosis: boolean
+  selectedInterventions: Record<string, boolean>
+}
+
 export type ReviewEntry = {
   caseId: string
   caseTitle: string

@@ -1,7 +1,7 @@
-import { Symptom } from '@/types'
+import { LegacySymptom } from '@/types'
 import { useEffect, useState } from 'react'
 
-type Props = { symptoms: Symptom[] }
+type Props = { symptoms: LegacySymptom[] }
 
 export default function SymptomDialogue({ symptoms }: Props) {
   const [visibleCount, setVisibleCount] = useState(0)

@@ -1,8 +1,8 @@
-import { Intervention } from '@/types'
+import { LegacyIntervention } from '@/types'
 import { useMemo, useState } from 'react'
 
 type Props = {
-  options: Intervention[]
+  options: LegacyIntervention[]
   onToggle: (id: string) => void
   onSubmit: () => void
 }
