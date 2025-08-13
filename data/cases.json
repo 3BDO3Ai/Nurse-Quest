@@ -1,0 +1,79 @@
+[
+  {
+    "id": "asthma-001",
+    "title": "Acute Asthma Exacerbation",
+    "avatar": "/avatars/patient_base.svg",
+    "visualSymptoms": {
+      "wheezing": "/avatars/patient_wheeze.svg",
+      "cyanosis": "/avatars/patient_cyanosis.svg"
+    },
+    "diagnosisOptions": [
+      { "id": "asthma", "text": "Asthma Exacerbation", "correct": true },
+      { "id": "pneumonia", "text": "Pneumonia", "correct": false },
+      { "id": "anxiety", "text": "Panic Attack", "correct": false },
+      { "id": "mi", "text": "Myocardial Infarction", "correct": false }
+    ],
+    "stages": [
+      {
+        "id": "stage1",
+        "symptoms": [
+          { "id": "sob", "text": "Shortness of breath with tight chest", "visual": "wheezing" },
+          { "id": "cough", "text": "Dry, persistent cough" }
+        ]
+      },
+      {
+        "id": "stage2",
+        "symptoms": [
+          { "id": "wheeze", "text": "Audible wheezing on exhalation", "visual": "wheezing" },
+          { "id": "cyanosis", "text": "Slight cyanosis around lips", "visual": "cyanosis" }
+        ]
+      }
+    ],
+    "interventionPool": [
+      { "id": "o2", "text": "Administer oxygen via nasal cannula", "correct": true },
+      { "id": "neb", "text": "Provide nebulized albuterol", "correct": true },
+      { "id": "steroid", "text": "Administer systemic corticosteroids", "correct": true },
+      { "id": "abx", "text": "Start broad-spectrum antibiotics", "correct": false },
+      { "id": "layflat", "text": "Place patient supine flat", "correct": false },
+      { "id": "sedative", "text": "Give benzodiazepines to calm", "correct": false }
+    ]
+  },
+  {
+    "id": "depression-001",
+    "title": "Major Depressive Episode",
+    "avatar": "/avatars/patient_base.svg",
+    "visualSymptoms": {
+      "tearful": "/avatars/patient_tearful.svg"
+    },
+    "diagnosisOptions": [
+      { "id": "dep", "text": "Major Depressive Disorder", "correct": true },
+      { "id": "bipolar", "text": "Bipolar Mania", "correct": false },
+      { "id": "schizo", "text": "Schizophrenia", "correct": false },
+      { "id": "adhd", "text": "ADHD", "correct": false }
+    ],
+    "stages": [
+      {
+        "id": "stage1",
+        "symptoms": [
+          { "id": "anhedonia", "text": "Loss of interest in activities" },
+          { "id": "sleep", "text": "Insomnia most nights" }
+        ]
+      },
+      {
+        "id": "stage2",
+        "symptoms": [
+          { "id": "sad", "text": "Persistent low mood and tearfulness", "visual": "tearful" },
+          { "id": "appetite", "text": "Reduced appetite and weight loss" }
+        ]
+      }
+    ],
+    "interventionPool": [
+      { "id": "si", "text": "Assess for suicidal ideation and plan", "correct": true },
+      { "id": "ssri", "text": "Initiate SSRI therapy per protocol", "correct": true },
+      { "id": "therapy", "text": "Refer to cognitive-behavioral therapy", "correct": true },
+      { "id": "isolation", "text": "Encourage isolation and bed rest", "correct": false },
+      { "id": "benzo", "text": "Start benzodiazepines PRN daily", "correct": false },
+      { "id": "sugary", "text": "Recommend high sugar diet", "correct": false }
+    ]
+  }
+]
